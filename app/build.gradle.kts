@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -31,16 +34,37 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    kotlin {
+        jvmToolchain(11)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
+
     buildFeatures {
         compose = true
     }
+    flavorDimensions += listOf("news_from_another_source")
 }
 
 dependencies {
-
+    //retrofit
+    implementation(libs.retrofit.core)
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.kotlinx.serialization)
+    //coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+    //kotlin serialization
+    implementation(libs.serialization.json)
+    //koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    //coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
