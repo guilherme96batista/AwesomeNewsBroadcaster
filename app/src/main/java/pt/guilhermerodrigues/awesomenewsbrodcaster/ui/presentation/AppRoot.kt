@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.ImageLoader
-import coil3.compose.setSingletonImageLoaderFactory
+import coil3.SingletonImageLoader
 import coil3.disk.DiskCache
 import coil3.disk.directory
 import coil3.memory.MemoryCache
@@ -30,7 +30,7 @@ import java.io.File
 fun AppRoot() {
     var selected: Article? by remember { mutableStateOf(null) }
     val okHttp: OkHttpClient = koinInject()
-    setSingletonImageLoaderFactory { context ->
+    SingletonImageLoader.setSafe { context ->
         val imageDiskDir = File(context.cacheDir, "coil_image_cache")
         ImageLoader.Builder(context)
             .components {
