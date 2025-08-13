@@ -8,6 +8,7 @@ import org.koin.dsl.module
 import pt.guilhermerodrigues.awesomenewsbrodcaster.apiKey
 import pt.guilhermerodrigues.awesomenewsbrodcaster.data.ArticlesApi
 import pt.guilhermerodrigues.awesomenewsbrodcaster.data.ArticlesRepo
+import pt.guilhermerodrigues.awesomenewsbrodcaster.source
 import retrofit2.Retrofit
 
 val networkModule = module {
@@ -31,5 +32,5 @@ val networkModule = module {
 
     single<ArticlesApi>{ get<Retrofit>().create(ArticlesApi::class.java) }
 
-    single { ArticlesRepo(get(), get(apiKey)) }
+    single { ArticlesRepo(get(), get(apiKey), get(source)) }
 }

@@ -8,9 +8,10 @@ import pt.guilhermerodrigues.awesomenewsbrodcaster.domain.toDomainOrNull
 
 class ArticlesRepo(
     private val api: ArticlesApi,
-    private val apiKey: String
+    private val apiKey: String,
+    private val source: String
 ) {
-    suspend fun getTopArticles(source: String): List<Article> = withContext(Dispatchers.IO) {
+    suspend fun getTopArticles(): List<Article> = withContext(Dispatchers.IO) {
         val response = api.getTopHeadlines(source, apiKey)
         if (response.status == StatusDto.ok)
             response.articles.mapNotNull{it.toDomainOrNull()}.sortedByDescending { it.publishedAt }

@@ -36,6 +36,21 @@ android {
         buildConfigField("String", "news_api_key", "\"${apiKey.get()}\"")
     }
 
+    flavorDimensions += "NewsSource"
+
+    productFlavors{
+        create("bbc") {
+            dimension = "NewsSource"
+            buildConfigField("String", "news_source", "\"bbc-news\"")
+            applicationIdSuffix = ".bbc"
+        }
+        create("cnn") {
+            dimension = "NewsSource"
+            buildConfigField("String", "news_source", "\"cnn\"")
+            applicationIdSuffix = ".cnn"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -61,7 +76,7 @@ android {
         compose = true
         buildConfig = true
     }
-    flavorDimensions += listOf("news_from_another_source")
+
 }
 
 dependencies {
@@ -91,6 +106,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

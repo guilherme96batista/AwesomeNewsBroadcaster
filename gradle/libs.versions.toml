@@ -15,6 +15,8 @@ koin = "4.1.0"
 serialization = "1.9.0"
 retrofit-ks = "1.0.0"
 coil3 = "3.3.0"
+mockk = "1.14.5"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +41,7 @@ retrofit-kotlinx-serialization = { group = "com.jakewharton.retrofit", name = "r
 #coroutines
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines"}
 #serialization
 serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 #koin
@@ -48,6 +51,8 @@ koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", versi
 #coil
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3"}
 coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil3"}
+#Mockk
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -12,6 +12,6 @@ import pt.guilhermerodrigues.awesomenewsbrodcaster.data.ArticlesRepo
 class GetTopArticlesUseCase(val repo: ArticlesRepo): UseCase<Unit, Flow<AsyncState<List<Article>>>>() {
     override suspend operator fun invoke(params: Unit): Flow<AsyncState<List<Article>>> = flow {
         emit(AsyncState.Loading)
-        emit(AsyncState.Success(repo.getTopArticles("bbc-news")))
+        emit(AsyncState.Success(repo.getTopArticles()))
     }.catch { e -> emit(AsyncState.Error(e)) }.flowOn(Dispatchers.IO)
 }
