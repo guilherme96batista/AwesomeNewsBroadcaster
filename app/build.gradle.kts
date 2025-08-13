@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -19,6 +20,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localPropApiKey = providers.provider {
+            val props = Properties()
+            val file = rootProject.file("local.properties")
+            if (file.exists()) file.inputStream().use { props.load(it) }
+            props.getProperty("news_api_key") ?: ""
+        }
+
+        val apiKey = providers.gradleProperty("news_api_key")
+            .orElse(providers.environmentVariable("news_api_key"))
+            .orElse(localPropApiKey)
+            .orElse("")
+
+        buildConfigField("String", "news_api_key", "\"${apiKey.get()}\"")
     }
 
     buildTypes {
@@ -44,6 +59,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     flavorDimensions += listOf("news_from_another_source")
 }
@@ -62,6 +78,7 @@ dependencies {
     //koin
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
     //coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
