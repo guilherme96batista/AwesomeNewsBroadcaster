@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "pt.guilhermerodrigues.awesomenewsbrodcaster"
+    namespace = "pt.guilhermerodrigues.awesomenewsbroadcaster"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "pt.guilhermerodrigues.awesomenewsbrodcaster"
+        applicationId = "pt.guilhermerodrigues.awesomenewsbroadcaster"
         minSdk = 29
         targetSdk = 36
         versionCode = 1
